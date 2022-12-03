@@ -8,6 +8,7 @@ conv_to_scores <- function(x) {
   )
 }
 
+
 # Q1
 df <- fread(
   file = "2022/2/input.txt",
