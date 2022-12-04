@@ -1,7 +1,10 @@
+.DS_Store
 .Rproj.user/
 .Rprofile
 .Renviron
 *.Rproj
+*.toml
 *.txt
 solve
 cookie.txt
+rust-project.json
