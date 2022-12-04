@@ -11,7 +11,7 @@ conv_to_scores <- function(x) {
 
 # Q1
 df <- fread(
-  file = "2022/2/input.txt",
+  file = "2/input.txt",
   sep = " ",
   header = FALSE,
   col.names = c("them", "me")
@@ -29,7 +29,7 @@ print(sum(df$final_score))
 
 # Q2
 df <- fread(
-  file = "2022/2/input.txt",
+  file = "2/input.txt",
   sep = " ",
   header = FALSE,
   col.names = c("them", "outcome")

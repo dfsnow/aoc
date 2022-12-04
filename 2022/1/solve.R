@@ -1,6 +1,6 @@
 library(data.table)
 
-df <- fread("2022/1/input.txt")
+df <- fread("1/input.txt")
 df[, grp := cumsum(is.na(V1))]
 df <- df[, .(total = sum(V1, na.rm = TRUE)), by = grp]
 

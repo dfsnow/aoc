@@ -6,7 +6,7 @@ conv_to_pri <- function(x) {
 
 
 # Q1
-df <- fread("2022/3/input.txt", header = FALSE)
+df <- fread("3/input.txt", header = FALSE)
 
 df[, c("L", "R") := .(
   strsplit(substr(V1, 1, nchar(V1) / 2), split = ""),
@@ -18,7 +18,7 @@ df[, matched := conv_to_pri(mapply(function(x, y) unique(x[y]), L, matched))]
 print(sum(df$matched))
 
 # Q2
-df <- fread("2022/3/input.txt", header = FALSE)
+df <- fread("3/input.txt", header = FALSE)
 
 df[, V1 := strsplit(V1, split = "")]
 df[, c("id", "grp") := .(
