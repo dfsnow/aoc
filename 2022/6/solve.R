@@ -1,15 +1,12 @@
 input <- readLines("6/input.txt")
 
-str_scan <- function(x, window = 4) {
-  wm1 <- window - 1
-  is_marker <- c()
-  for (i in seq_len(nchar(input))) {
-    is_marker <- c(
-      is_marker,
-      grepl("^(?!.*(.).*\\1)[a-z]+$", substr(input, i, i + wm1), perl = T)
-    )
+str_scan <- function(x, ws = 4) {
+  for (i in seq_len(nchar(x))) {
+      if (grepl("^(?!.*(.).*\\1)[a-z]+$", substr(x, i, i + ws - 1), perl = T)) {
+        print(i + ws - 1)
+        break
+      }
   }
-  print(which(is_marker)[1] + wm1)
 }
 
 # Q1
