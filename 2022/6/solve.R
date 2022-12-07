@@ -1,4 +1,4 @@
-input <- readLines("6/input.txt", n = 8)
+input <- readLines("6/input.txt")
 
 str_scan <- function(x, window = 4) {
   wm1 <- window - 1
