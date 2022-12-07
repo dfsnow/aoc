@@ -1,10 +1,11 @@
 library(data.table)
 
+# Input
 df <- fread("1/input.txt")
-df[, grp := cumsum(is.na(V1))]
-df <- df[, .(total = sum(V1, na.rm = TRUE)), by = grp]
 
 # Q1
+df[, grp := cumsum(is.na(V1))]
+df <- df[, .(total = sum(V1, na.rm = TRUE)), by = grp]
 print(max(df$total))
 
 # Q2
