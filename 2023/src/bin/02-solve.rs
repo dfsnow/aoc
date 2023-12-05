@@ -1,15 +1,5 @@
 use std::collections::HashMap;
-use std::env::args;
-use std::io::{stdin, Read};
 use regex::Regex;
-
-fn get_lines() -> Vec<String> {
-    let mut input = String::new();
-    stdin().read_to_string(&mut input).unwrap();
-    let mut lines = input.split("\n").map(|x| x.to_string()).collect::<Vec<String>>();
-    lines.retain(|s| !s.is_empty());
-    return lines
-}
 
 fn q1(lines: Vec<String>, cubes: HashMap<&str, i32>) {
     let re_id = Regex::new(r"^Game ([0-9]{1,3}):").unwrap();
@@ -52,16 +42,21 @@ fn q2(lines: Vec<String>, cubes: HashMap<&str, i32>) {
 }
 
 fn main() {
+    let start = std::time::Instant::now();
+    let input = std::fs::read_to_string("input/02-input.txt")
+        .unwrap()
+        .lines()
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>();
+
     let cubes = HashMap::from([
         ("red", 12),
         ("green", 13),
         ("blue", 14),
     ]);
 
-    let args: Vec<String> = args().collect();
-    if args[1] == "1" {
-        q1(get_lines(), cubes);
-    } else if args[1] == "2" {
-        q2(get_lines(), cubes);
-    }
+    q1(input.clone(), cubes.clone());
+    q2(input, cubes);
+
+    println!("time elapsed: {:?}", start.elapsed());
 }

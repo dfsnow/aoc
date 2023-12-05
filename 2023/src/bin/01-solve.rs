@@ -1,6 +1,4 @@
 use std::collections::HashMap;
-use std::env::args;
-use std::io::{stdin, Read};
 use regex::Regex;
 
 const NUM_MAP: [(&'static str, &'static str); 9] = [
@@ -14,14 +12,6 @@ const NUM_MAP: [(&'static str, &'static str); 9] = [
     ("eight", "8"), 
     ("nine", "9")
 ];
-
-fn get_lines() -> Vec<String> {
-    let mut input = String::new();
-    stdin().read_to_string(&mut input).unwrap();
-    let mut lines = input.split("\n").map(|x| x.to_string()).collect::<Vec<String>>();
-    lines.retain(|s| !s.is_empty());
-    return lines
-}
 
 fn reverse_string(x: &String) -> String {
     let mut x_chars: Vec<char> = x.chars().collect();
@@ -73,11 +63,17 @@ fn q2(lines: Vec<String>, num_to_words: HashMap<&str, &str>) {
 }
 
 fn main() {
+    let start = std::time::Instant::now();
+    let input = std::fs::read_to_string("input/01-input.txt")
+        .unwrap()
+        .lines()
+        .map(|x| x.to_string())
+        .collect::<Vec<String>>();
+
     let num_to_words: HashMap<_, _> = NUM_MAP.into_iter().collect();
-    let args: Vec<String> = args().collect();
-    if args[1] == "1" {
-        q1(get_lines());
-    } else if args[1] == "2" {
-        q2(get_lines(), num_to_words);
-    }
+
+    q1(input.clone());
+    q2(input, num_to_words);
+
+    println!("time elapsed: {:?}", start.elapsed());
 }
