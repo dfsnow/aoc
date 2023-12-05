@@ -3,9 +3,7 @@
 .Rprofile
 .Renviron
 *.Rproj
-*.toml
 *.txt
-solve
+target/
 cookie.txt
 rust-project.json
-aoc_*/
