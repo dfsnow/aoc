@@ -6,8 +6,8 @@ edition = "2021"
 [dependencies]
 regex = "1.10.2"
 
-[profile.dev]
-opt-level = 3
+# [profile.dev]
+# opt-level = 3
 
-[profile.release]
-lto = "thin"
+# [profile.release]
+# lto = "thin"
