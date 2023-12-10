@@ -1,6 +1,6 @@
-use std::str;
-use std::collections::HashMap;
 use regex::Regex;
+use std::collections::HashMap;
+use std::str;
 
 fn main() {
     let start = std::time::Instant::now();
@@ -25,24 +25,26 @@ fn main() {
                         // Bound the area to explore, starting from each number
                         let yi = if i as i32 + y < 0 || i as i32 + y >= input.len() as i32 { 0 } else { y };
                         let xi = if f.start() as i32 + x < 0 || f.end() as i32 + x > l.len() as i32 { 0 } else { x };
-                        let idx = &[input[i + yi as usize].as_bytes()[w + xi as usize]];
-                        let near_char = str::from_utf8(idx).unwrap();
-                        
+                        let idx_char = &[input[i + yi as usize].as_bytes()[w + xi as usize]];
+                        let idx_star = (i + yi as usize, w + xi as usize);
+
+                        let near_char = str::from_utf8(idx_char).unwrap();
+
                         // Send number matches to hashmap
                         if !(near_char.contains(".") || near_char.chars().all(|c| c.is_ascii_digit())) {
                             nums.entry((f.start(), f.end() - 1, i))
                                 .or_insert(parsed);
                         }
                         // Send numbers matching the same star to hashmap
-                        if let Some(star) = stars.get(&(i + yi as usize, w + xi as usize)) {
+                        if let Some(star) = stars.get(&idx_star) {
                             if !star.contains(&parsed) {
-                                stars.entry((i + yi as usize, w + xi as usize))
+                                stars.entry(idx_star)
                                     .or_default()
                                     .push(parsed);
                             }
                         } else {
                             if near_char.contains("*") {
-                                stars.entry((i + yi as usize, w + xi as usize))
+                                stars.entry(idx_star)
                                     .or_default()
                                     .push(parsed);
                             }
@@ -51,7 +53,7 @@ fn main() {
                 }
             }
         });
-    };
+    }
 
     let part2: i32 = stars
         .iter()
